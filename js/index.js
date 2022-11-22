@@ -13,7 +13,39 @@ const images = [
 ];
 
 // collego una variabile al HTML
-let slider = document.querySelector('.slider');
-for(i = 1; i < images.length; i++){
-    slider.innerHTML += `<img src="img/0${[i]}.webp" class='items-container'></img>` 
+let slider = document.querySelector('.items-container');
+// Creo un TAG Div dentro i quali metto img nel quale aggiungo src= [n] img incrementale
+for(i = 0; i <= images.length; i++){
+    
+    // reao il Contenitore DivImg
+    const divImg = document.createElement('div');
+
+    // aggiungo l'active al contenitore
+    if(i === 0) divImg.className = 'item active';
+    else divImg.className = 'item';
+
+    // creo img
+    let img = document.createElement('img');
+    // add src a img
+    img.src = images[i].image;
+    
+    // unisco i pezzi
+    divImg.appendChild(img);
+    slider.appendChild(divImg);
 }
+
+let active = 0;
+let item = document.getElementsByClassName('item');
+let next = document.querySelector('.next');
+let prev = document.querySelector('.prev');
+next.addEventListener('click',
+    function(){
+        if(active < images.length){
+            item[active].classList.remove('active');
+
+            active++
+
+            item[active].classList.add('active');
+        }
+    }
+);

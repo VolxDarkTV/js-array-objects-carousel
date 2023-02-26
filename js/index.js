@@ -15,7 +15,7 @@ const images = [
 // collego una variabile al HTML
 let slider = document.querySelector('.items-container');
 // Creo un TAG Div dentro i quali metto img nel quale aggiungo src= [n] img incrementale
-for(i = 0; i <= images.length; i++){
+for(i = 0; i < images.length; i++){
     
     // reao il Contenitore DivImg
     const divImg = document.createElement('div');
@@ -38,14 +38,20 @@ let active = 0;
 let item = document.getElementsByClassName('item');
 let next = document.querySelector('.next');
 let prev = document.querySelector('.prev');
-next.addEventListener('click',
-    function(){
-        if(active < images.length){
-            item[active].classList.remove('active');
-
-            active++
-
-            item[active].classList.add('active');
-        }
+next.addEventListener('click', function() {
+    item[active].classList.remove('active');
+    active++;
+    if (active >= images.length) {
+      active = 0;
     }
-);
+    item[active].classList.add('active');
+  });
+  
+  prev.addEventListener('click', function() {
+    item[active].classList.remove('active');
+    active--;
+    if (active < 0) {
+      active = images.length - 1;
+    }
+    item[active].classList.add('active');
+  });
